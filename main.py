@@ -21,20 +21,7 @@ m = scene_spec.compile()
 d = mujoco.MjData(m)
 
 
-# with mujoco.viewer.launch_passive(model, data) as viewer:
-#     start = time.time()
-#     while viewer.is_running():
-#         step_start = time.time()
-
-#         mujoco.mj_step(model, data)
-
-#         viewer.sync()
-
-#         # Rudimentary time keeping, will drift relative to wall clock.
-#         time_until_next_step = model.opt.timestep - (time.time() - step_start)
-#         if time_until_next_step > 0:
-#             time.sleep(time_until_next_step)
-control_t = 0
+control_t = 1.0
 with mujoco.viewer.launch_passive(m, d) as viewer:
 
     last_update = 0
