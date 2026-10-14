@@ -17,7 +17,7 @@ class Planner:
         theta_list = []
 
         for t in t_val:
-            pose = self.traj(t)
+            pose, _ = self.traj(t)
             x_list.append(pose[0, 0])
             y_list.append(pose[1, 0])
             theta_list.append(pose[2, 0])
@@ -45,13 +45,23 @@ class Planner:
     def circle(self, v, r, c=(0.0, 0.0)):
 
         omega = v / r
+        x0, y0 = c
 
-        self.traj = lambda t: np.array(
-            [
-                [r * np.cos(omega * t) + c[0]],
-                [r * np.sin(omega * t) + c[1]],
-                [omega * t + np.pi / 2],
-            ]
+        self.traj = lambda t: (
+            np.array(
+                [
+                    [r * np.cos(omega * t) + x0],
+                    [r * np.sin(omega * t) + y0],
+                    [omega * t + np.pi / 2],
+                ]
+            ),
+            np.array(
+                [
+                    [v * np.cos(omega * t + np.pi / 2)],
+                    [v * np.sin(omega * t + np.pi / 2)],
+                    [omega],
+                ]
+            ),
         )
 
 
