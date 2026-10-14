@@ -17,7 +17,7 @@
   </asset>
 
   <worldbody>
-    <!-- CHASSIS / KORPUS ROBOTA (start nieco wyżej dla miękkiego opadnięcia) -->
+    <!-- CHASSIS / KORPUS ROBOTA -->
     <body name="chassis" pos="0 0 0.25">
       <freejoint name="root"/>
       
@@ -36,7 +36,7 @@
         <geom name="wheel_geom2" type="cylinder" size="0.12 0.025" zaxis="0 1 0" material="wheel_mat" mass="0.6"/>
       </body>
 
-      <!-- CASTER (Skorygowany rozmiar, pozycja i większe tłumienie zapobiegające drganiom) -->
+      <!-- CASTER -->
       <body name="caster" pos="0.15 0 -0.13">
         <joint name="caster_joint" type="ball" damping="0.05"/>
         <geom name="caster_geom" type="sphere" size="0.04" material="caster_mat" mass="0.05" friction="0.05"/>
