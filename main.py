@@ -7,7 +7,8 @@ from robot.robot import Robot
 
 world = map.World(100, 100)
 world.add_goal(map.Goal(30, 30))
-# world.generate_obstacles(30, 1.0)
+world.generate_obstacles(30, 1.0)
+world.view()
 scene_spec = world.to_mjspec()
 
 robot = Robot()
