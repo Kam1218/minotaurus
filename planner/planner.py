@@ -7,7 +7,7 @@ class Planner:
         self.traj = lambda t: np.array([[0.0], [0.0], [0.0]])
 
     def get(self, t):
-        return self.traf(t)
+        return self.traj(t)
 
     def view(self, T):
         t_val = np.linspace(0, T, 200)

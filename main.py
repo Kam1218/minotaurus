@@ -28,13 +28,13 @@ d = mujoco.MjData(m)
 robot.setModelData(m, d)
 
 pl = Planner()
-pl.circle(0.5, 2.0)
+pl.circle(0.2, 5.0)
 
 ctrl = Controler()
 
-d4p = []
+k = np.array([[2], [10], [3]])
 
-control_t = 1.0
+control_t = 0.01
 with mujoco.viewer.launch_passive(m, d) as viewer:
 
     last_update = 0
@@ -43,9 +43,14 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
         if d.time - last_update >= control_t:
 
             last_update = d.time
-            robot.ctrl(0.5, 1.0)
 
-            d4p.append(robot.x)
+            xr, dxr = pl.get(d.time)
+
+            v, omega = ctrl.kanayama(robot.x, xr, dxr, k)
+
+            # print(f"{v} {omega}")
+
+            robot.ctrl(v, omega)
 
         mujoco.mj_step(m, d)
 

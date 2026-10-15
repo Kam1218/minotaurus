@@ -38,14 +38,14 @@ class Robot:
         self.vel_adr = model.sensor_adr[vel_id]
         self.gyro_adr = model.sensor_adr[gyro_id]
 
-        print(f"adr {self.pos_adr} {self.quat_adr} {self.vel_adr} {self.gyro_adr}")
-
     @property
     def x(self):
         x, y, _ = self.world_data.sensordata[self.pos_adr : self.pos_adr + 3]
         w, qx, qy, qz = self.world_data.sensordata[self.quat_adr : self.quat_adr + 4]
 
         theta = math.atan2(2.0 * (w * qz + qx * qy), 1.0 - 2.0 * (qy * qy + qz * qz))
+
+        theta = math.atan2(math.sin(theta), math.cos(theta))
 
         return np.array([[x], [y], [theta]])
 

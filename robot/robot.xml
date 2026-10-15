@@ -47,8 +47,8 @@
   </worldbody>
 
   <actuator>
-    <motor name="drive_motor1" joint="drive_joint1" ctrlrange="-10 10" gear="0.1"/>
-    <motor name="drive_motor2" joint="drive_joint2" ctrlrange="-10 10" gear="0.1"/>
+    <motor name="drive_motor_left" joint="drive_joint1" ctrlrange="-10 10" gear="0.1"/>
+    <motor name="drive_motor_right" joint="drive_joint2" ctrlrange="-10 10" gear="0.1"/>
   </actuator>
 
   <sensor>
