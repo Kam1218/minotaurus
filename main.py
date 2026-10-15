@@ -8,7 +8,7 @@ from robot.robot import Robot
 world = map.World(100, 100)
 world.add_goal(map.Goal(30, 30))
 world.generate_obstacles(30, 1.0)
-world.view()
+# world.view()
 scene_spec = world.to_mjspec()
 
 robot = Robot()
@@ -21,6 +21,7 @@ scene_spec.attach(robot_spec, frame=frame, prefix="robot_")
 m = scene_spec.compile()
 d = mujoco.MjData(m)
 
+robot.setData(d)
 
 control_t = 1.0
 with mujoco.viewer.launch_passive(m, d) as viewer:
@@ -30,8 +31,7 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
     while viewer.is_running():
         if d.time - last_update >= control_t:
             last_update = d.time
-            d.ctrl[0] = 2.0
-            d.ctrl[1] = -2.0
+            robot.ctrl(0.5, 1.0)
 
         mujoco.mj_step(m, d)
 
