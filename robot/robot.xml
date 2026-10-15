@@ -41,6 +41,8 @@
         <joint name="caster_joint" type="ball" damping="0.05"/>
         <geom name="caster_geom" type="sphere" size="0.04" material="caster_mat" mass="0.05" friction="0.05"/>
       </body>
+
+      <site name="measure_point" pos="-0.2 0 0" size="0.01" rgba="0 1 0 1"/>
     </body>
   </worldbody>
 
@@ -48,4 +50,11 @@
     <motor name="drive_motor1" joint="drive_joint1" ctrlrange="-10 10" gear="0.1"/>
     <motor name="drive_motor2" joint="drive_joint2" ctrlrange="-10 10" gear="0.1"/>
   </actuator>
+
+  <sensor>
+        <framepos name="pos" objtype="site" objname="measure_point"/>
+        <framequat name="quat" objtype="site" objname="measure_point"/>
+        <velocimeter name="vel" site="measure_point"/>
+        <gyro name="gyro" site="measure_point"/>
+  </sensor>
 </mujoco>
