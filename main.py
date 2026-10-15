@@ -32,7 +32,8 @@ pl.circle(0.2, 5.0)
 
 ctrl = Controler()
 
-k = np.array([[2], [10], [3]])
+k_k = np.array([[2], [10], [3]])
+k_s = np.array([[0.1], [1], [1]])
 
 control_t = 0.01
 with mujoco.viewer.launch_passive(m, d) as viewer:
@@ -46,7 +47,8 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
 
             xr, dxr = pl.get(d.time)
 
-            v, omega = ctrl.kanayama(robot.x, xr, dxr, k)
+            # v, omega = ctrl.kanayama(robot.x, xr, dxr, k_k)
+            v, omega = ctrl.samson(robot.x, xr, dxr, k_s)
 
             # print(f"{v} {omega}")
 
