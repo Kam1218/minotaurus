@@ -3,9 +3,10 @@ import numpy as np
 import time
 import mujoco.viewer
 import map.map as map
-from robot.robot import Robot
-from planner.planner import Planner
-from controler.controler import Controler
+from robot import Robot
+from planner import Planner
+from controler import Controler
+from simControler import SimControler
 
 
 def syncTime(start_sim_t, start_wall_t):
