@@ -7,8 +7,6 @@ from robot.robot import Robot
 from planner.planner import Planner
 from controler.controler import Controler
 
-import matplotlib.pyplot as plt
-
 
 def syncTime(start_sim_t, start_wall_t):
     wall_elapsed = time.time() - start_wall_t
