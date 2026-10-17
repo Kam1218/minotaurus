@@ -51,22 +51,7 @@ class SimControler:
 
                     self.last_update = self.d.time
 
-                    if self.end:
-                        if self.flip:
-                            self.pl.circle(0.2, 2.5)
-                            print("teraz kółeczko")
-                        else:
-                            self.pl.square(0.2, 2 * 2.5 / np.sqrt(2), 3 * np.pi / 4.0)
-                            print("a teraz kwadracik")
-                        self.flip = not self.flip
-                        self.start_t = self.d.time
-
-                    xr, dxr, self.end = self.pl.get(self.d.time - self.start_t)
-
-                    v, omega = self.ctrl.kanayama(self.robot.x, xr, dxr, self.k_k)
-                    # v, omega = self.ctrl.samson(robot.x, xr, dxr, k_s)
-
-                    self.robot.ctrl(v, omega)
+                    self.sim_step()
 
                 mujoco.mj_step(self.m, self.d)
 
@@ -76,7 +61,23 @@ class SimControler:
         finally:
             self.viewer.close()
 
-    def sim_step(self): ...
+    def sim_step(self):
+        if self.end:
+            if self.flip:
+                self.pl.circle(0.2, 2.5)
+                print("teraz kółeczko")
+            else:
+                self.pl.square(0.2, 2 * 2.5 / np.sqrt(2), 3 * np.pi / 4.0)
+                print("a teraz kwadracik")
+            self.flip = not self.flip
+            self.start_t = self.d.time
+
+        xr, dxr, self.end = self.pl.get(self.d.time - self.start_t)
+
+        v, omega = self.ctrl.kanayama(self.robot.x, xr, dxr, self.k_k)
+        # v, omega = self.ctrl.samson(robot.x, xr, dxr, k_s)
+
+        self.robot.ctrl(v, omega)
 
     def syncTime(self, start_sim_t, start_wall_t):
         wall_elapsed = time.time() - start_wall_t
