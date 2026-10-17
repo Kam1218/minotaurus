@@ -41,7 +41,6 @@ class SimControler:
             self.k_s = np.array([[0.1], [1], [1]])
 
             self.pl = Planner()
-            self.pl.circle(0.2, 2.5)
             # self.pl.square(0.2, 5.0, phi=np.pi / 4.0)
 
             self.ctrl = Controler()
